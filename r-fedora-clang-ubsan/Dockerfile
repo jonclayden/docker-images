@@ -1,0 +1,23 @@
+FROM fedora
+
+RUN yum update -y
+RUN yum install -y clang libomp-devel gcc-gfortran readline-devel zlib-devel bzip2-devel lzma-devel xz-devel pcre-devel libcurl-devel make findutils which sudo git
+
+WORKDIR /root
+
+RUN curl -O https://cloud.r-project.org/src/base-prerelease/R-devel.tar.gz
+RUN tar -zxf R-devel.tar.gz && rm R-devel.tar.gz
+COPY config.site R-devel/
+
+ENV ASAN_OPTIONS 'detect_leaks=0:detect_odr_violation=0'
+RUN cd R-devel && ./configure --without-x --disable-java && make && make install
+RUN rm -rf R-devel
+
+RUN useradd -G wheel user && echo "user:docker" | chpasswd
+USER user
+WORKDIR /home/user
+
+RUN mkdir Rlibrary
+RUN echo 'options(repos=c(CRAN="https://cloud.r-project.org"), menu.graphics=FALSE, Ncpus=2L); .libPaths(c("/home/user/Rlibrary",.libPaths()))' >.Rprofile
+
+CMD [ "/bin/bash" ]
