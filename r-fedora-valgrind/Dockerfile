@@ -1,7 +1,7 @@
 FROM fedora
 
 RUN yum update -y
-RUN yum install -y clang libcxx-devel libomp-devel gcc-gfortran readline-devel zlib-devel bzip2-devel lzma-devel xz-devel pcre-devel libcurl-devel make valgrind
+RUN yum install -y clang libcxx-devel libomp-devel gcc-gfortran readline-devel zlib-devel bzip2-devel xz-devel pcre-devel libcurl-devel make valgrind
 RUN yum install -y findutils which sudo git
 
 WORKDIR /root
