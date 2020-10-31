@@ -40,6 +40,9 @@ RUN mkdir -p niftyreg-build /opt/niftyreg
 RUN cd niftyreg-build && conda run -n neuroimaging cmake -DCMAKE_INSTALL_PREFIX=/opt/niftyreg ../niftyreg && conda run -n neuroimaging make install
 RUN rm -rf niftyreg niftyreg-build
 
+# Install SMT
+RUN wget -O- -q https://github.com/ekaden/smt/releases/download/v0.4/smt-0.4-linux-x64.tar.gz | tar -C /opt -xzf -
+
 # Install ANTs
 # NB: This is extremely time-consuming and currently doesn't work, so skip for now
 # RUN git clone https://github.com/ANTsX/ANTs.git

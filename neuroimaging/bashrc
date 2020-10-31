@@ -3,7 +3,9 @@
 source /opt/conda/etc/profile.d/conda.sh
 conda activate neuroimaging
 
-export PATH=$PATH:/opt/niftyreg/bin
+source /etc/fsl/fsl.sh
+
+export PATH=$PATH:/opt/niftyreg/bin:/opt/smt-0.4-linux-x64/bin
 
 export TRACTOR_HOME=/opt/tractor
 export PATH=$PATH:$TRACTOR_HOME/bin
