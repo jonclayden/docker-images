@@ -1,4 +1,4 @@
-FROM fedora
+FROM fedora:36
 
 RUN yum update -y
 RUN yum install -y clang libcxx-devel libomp-devel gcc-gfortran readline-devel zlib-devel bzip2-devel xz-devel pcre2-devel libcurl-devel make
@@ -10,7 +10,7 @@ RUN curl -O https://cloud.r-project.org/src/base-prerelease/R-devel.tar.gz
 RUN tar -zxf R-devel.tar.gz && rm R-devel.tar.gz
 COPY config.site R-devel/
 
-ENV ASAN_OPTIONS 'detect_leaks=0:detect_odr_violation=0'
+ENV ASAN_OPTIONS 'detect_leaks=0'
 RUN cd R-devel && ./configure --without-x --disable-java && make && make install
 RUN rm -rf R-devel
 
