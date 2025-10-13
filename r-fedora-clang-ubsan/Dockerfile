@@ -10,8 +10,8 @@ RUN curl -O https://cloud.r-project.org/src/base-prerelease/R-devel.tar.gz
 RUN tar -zxf R-devel.tar.gz && rm R-devel.tar.gz
 COPY config.site R-devel/
 
-ENV ASAN_OPTIONS 'detect_leaks=0'
-RUN cd R-devel && ./configure --without-x --disable-java && make && make install
+ENV ASAN_OPTIONS='detect_leaks=0'
+RUN cd R-devel && ./configure --without-x --disable-java --enable-R-shlib && make && make install
 RUN rm -rf R-devel
 
 RUN useradd -G wheel user && echo "user:docker" | chpasswd
