@@ -1,10 +1,6 @@
 CC=clang
 CXX=clang++
-CFLAGS="-g -O3 -Wall -pedantic"
-F77=gfortran
-FC=gfortran
-FFLAGS="-g -O2 -mtune=native"
-FCFLAGS="-g -O2 -mtune=native" 
-CXXFLAGS="-g -O3 -Wall -pedantic"
-CXXSTD=-std=gnu++98
-MAIN_LD=clang++
+FC=flang-new
+CFLAGS="-O3 -Wall -pedantic -Wp,-D_FORTIFY_SOURCE=3"
+FFLAGS="-O2 -pedantic"
+CXXFLAGS="-O3 -Wall -pedantic -frtti -Wp,-D_FORTIFY_SOURCE=3"

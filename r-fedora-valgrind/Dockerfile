@@ -10,7 +10,7 @@ RUN curl -O https://cloud.r-project.org/src/base-prerelease/R-devel.tar.gz
 RUN tar -zxf R-devel.tar.gz && rm R-devel.tar.gz
 COPY config.site R-devel/
 
-RUN cd R-devel && ./configure --without-x --disable-java --with-valgrind-instrumentation=2 --with-system-valgrind-headers && make && make install
+RUN cd R-devel && ./configure --without-x --disable-java --enable-R-shlib --with-valgrind-instrumentation=2 --with-system-valgrind-headers && make && make install
 RUN rm -rf R-devel
 
 RUN useradd -G wheel user && echo "user:docker" | chpasswd
