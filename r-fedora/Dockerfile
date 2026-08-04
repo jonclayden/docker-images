@@ -3,7 +3,7 @@ FROM fedora
 RUN yum update -y
 RUN yum install -y R
 RUN yum install -y libXt-devel
-RUN yum install -y sudo
+RUN yum install -y findutils which sudo git
 
 RUN useradd -G wheel user && echo "user:docker" | chpasswd
 WORKDIR /home/user
